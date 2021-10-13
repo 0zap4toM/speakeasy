@@ -5521,7 +5521,7 @@ class Kernel32(api.ApiHandler):
         return size
     
     @apihook('HeapValidate', argc=3)
-    def Wow64RevertWow64FsRedirection(self, emu, argv, ctx={}):
+    def HeapValidate(self, emu, argv, ctx={}):
         '''
         BOOL HeapValidate(
             HANDLE  hHeap,
