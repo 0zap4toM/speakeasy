@@ -5519,3 +5519,17 @@ class Kernel32(api.ApiHandler):
             self.mem_write(lpFilename, out)
 
         return size
+    
+    @apihook('HeapValidate', argc=3)
+    def Wow64RevertWow64FsRedirection(self, emu, argv, ctx={}):
+        '''
+        BOOL HeapValidate(
+            HANDLE  hHeap,
+            DWORD   dwFlags,
+            LPCVOID lpMem
+        );
+        '''
+        hHeap,dwFlags,lpMem = argv
+        rv = 1
+
+        return rv

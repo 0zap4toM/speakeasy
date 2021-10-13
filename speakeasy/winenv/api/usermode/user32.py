@@ -1248,3 +1248,18 @@ class User32(api.ApiHandler):
         self.mem_write(lpList + 4, locale.to_bytes(2, 'little'))
 
         return 1
+    
+    @apihook('RegisterClipboardFormatA', argc=1)
+    def RegisterClipboardFormatA(self, emu, argv, ctx={}):
+        """
+        UINT RegisterClipboardFormatA(
+            LPCSTR lpszFormat
+        );
+        """
+        lpszFormat, = argv
+
+        cw = self.get_char_width(ctx)
+        FormatStr = self.read_mem_string(lpszFormat,cw)
+        print("          : \033[1;33;40m UC2->USER32.RegisterClipboardFormatA("+ FormatStr +")\x1b[0m")
+
+        return 1
